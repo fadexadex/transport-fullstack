@@ -1,0 +1,128 @@
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    setError('');
+    
+    try {
+      const response = await axios.post('http://your-pocketbase-server/api/collections/users/auth-with-password', {
+        identity: username,
+        password: password,
+      });
+
+      if (response.data) {
+        // Store token or user data as needed
+        // Example: localStorage.setItem('authToken', response.data.token);
+
+        alert('Login successful!');
+        // Redirect to dashboard
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      setError('Invalid username or password');
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Username: </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password: </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      {error && <p style={{color: 'red'}}>{error}</p>}
+    </div>
+  );
+};
+
+export default Login;
+
+
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const Register = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    setError('');
+
+    try {
+      const response = await axios.post('http://127.0.0.1/api/collections/users/records', {
+        username: username,
+        password: password,
+        passwordConfirm: password,
+      });
+
+      if (response.data) {
+        alert('Registration successful!');
+        // Redirect to login
+        navigate('/login');
+      }
+    } catch (err) {
+      setError('Registration failed');
+    }
+  };
+
+
+
+
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Replace with your data fetching logic
+    axios.get('https://127.0.0.1:8090/api/collections/logistics/records')
+      .then(response => {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  const totalRevenue = data.reduce((sum, item) => sum + item.amount, 0);
+  const totalTransactions = data.length;
+  const chartData = {
+    labels: data.map(item => item.date),
+    datasets: [
+      {
+        label: 'Payments',
+        data: data.map(item => item.amount),
+        backgroundColor: 'rgba(75,192,192,0.6)',
+      },
+    ],
+  };

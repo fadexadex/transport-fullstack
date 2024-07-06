@@ -1,0 +1,172 @@
+.Tp{
+  text-align: center;
+  color: rgb(0, 0, 0);
+
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.buttombar{
+  display: flex;
+  justify-content: center;
+  position: inherit;
+  margin-top: 30px;
+  background-color: black;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+}
+
+input{
+  border-radius: 10px;
+  border: 1px solid black;
+  position: relative;
+  justify-content: center;
+  width: 10px;
+  right: 10px;
+
+}
+
+button{
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  background-color: white;
+  cursor: pointer;
+
+}
+
+
+.at-left{
+  position:absolute;
+  left:0;
+  background-color:white;
+  height: 90vh;
+  color:black;
+
+}
+
+.mid{
+  text-align: center;
+  position:absolute;
+  top:0px;
+  background-color: white;
+  color: black;
+  width:400px;
+  height:89vh
+}
+
+input.sch{
+  width:fit-content;
+  text-align: center;
+}
+
+input.to{
+  width:300px;
+  height: fit-content;
+  text-align: center;
+}
+
+input.from{
+  width:300px;
+  height: fit-content;
+  text-align: center;
+}
+
+body{
+  background-color: rgb(243, 243, 243);
+}
+
+.driver{
+  color: black;
+}
+
+
+
+.trip{
+  justify-content: center;
+  text-align: left;
+  position:absolute;
+  border: 1px solid black;
+  right: 1100px;
+  bottom: 80px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width:260px;
+}
+
+h1{
+  position: absolute;
+  right: 899px;
+}
+.trip1{
+  justify-content: center;
+  text-align: left;
+  position:absolute;
+  border: 1px solid black;
+  right: 1100px;
+  bottom: 230px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width:260px;
+}
+
+.trip2{
+  justify-content: center;
+  position:absolute;
+  text-align: left;
+  border: 1px solid black;
+  right: 1100px;
+  bottom: 380px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width: 260px;
+}
+
+.info{
+  text-align: left;
+  position:absolute;
+  border: 1px solid black;
+  bottom: 80px;
+  left: 600px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width: 500px;
+  display: flex;
+  z-index: 2;
+}
+
+.Map{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 72%;
+  height: 100%;
+  z-index: 1;
+  }
+
+
+
+@media only screen and (max-width: 1080px) {
+  body {
+    font-size: 14px;
+  }
+}
+button.profile{
+  justify-content: center;
+  position:absolute;
+  right: 1310px;
+  bottom: 580px;
+  border-radius: 100%;
+  color: black;
+ 
+}
+
