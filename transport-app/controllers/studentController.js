@@ -1,8 +1,9 @@
-const { response } = require("express");
 const models = require("../models/index");
 const Student = models.studentModel;
 const Driver = models.driverModel;
 const utils = require("../utils");
+const services = require("../services");
+const { uploadProfilePicture } = services.imageUpload;
 const { hashPassword, comparePassword } = utils.hash;
 const { generateToken } = utils.jwt;
 const { studentSignUpValidator, logInValidator, locationValidator } =
@@ -91,10 +92,16 @@ const studentLogin = async (req, res) => {
   }
 };
 
+//upload profile picture
+const uploadProfileImage = async (req, res) => {
+  const { email } = req.user;
+  const { path } = req.file;
+  uploadProfilePicture(req, res, email, path, Student);
+};
+
 //Find Nearby Drivers
 const findDrivers = async (req, res) => {
   try {
-    console.log(req.query);
     const { error, value } = locationValidator.validate(req.query);
     if (error) {
       return res
@@ -128,4 +135,10 @@ const findDrivers = async (req, res) => {
   }
 };
 
-module.exports = { studentSignUp, studentLogin, findDrivers };
+module.exports = {
+  studentSignUp,
+  studentLogin,
+  findDrivers,
+  uploadProfilePicture,
+  uploadProfileImage,
+};

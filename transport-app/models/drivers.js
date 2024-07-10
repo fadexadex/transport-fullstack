@@ -39,6 +39,10 @@ const driverSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  imageUrl: {
+    type: String,
+    default: "",
+  },
   driver_license: {
     type: String,
     default: "",

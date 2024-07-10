@@ -18,6 +18,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  imageUrl: {
+    type: String,
+    default: "",
+  },
   location: {
     type: String,
     enum: ["Point"],

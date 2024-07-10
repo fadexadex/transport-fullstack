@@ -1,7 +1,12 @@
 const models = require("../models/index");
 const Driver = models.driverModel;
-const utils = require("../utils");
+
 const fs = require("fs");
+
+const services = require("../services");
+const { uploadProfilePicture } = services.imageUpload;
+
+const utils = require("../utils");
 const { hashPassword, comparePassword } = utils.hash;
 const { generateToken } = utils.jwt;
 const { driverSignUPValidator, logInValidator, locationValidator } =
@@ -98,6 +103,13 @@ const driverLogIn = async (req, res) => {
   }
 };
 
+//upload profile picture
+const uploadProfileImage = async (req, res) => {
+  const { email } = req.user;
+  const { path } = req.file;
+  uploadProfilePicture(req, res, email, path, Driver);
+};
+
 //get verified
 const uploadLicense = async (req, res) => {
   try {
@@ -172,4 +184,5 @@ module.exports = {
   uploadLicense,
   checkVerificationStatus,
   allowLocationTracking,
+  uploadProfileImage,
 };

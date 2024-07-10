@@ -13,7 +13,7 @@ const cloudinaryUploadImage = async (file) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(file, (error, result) => {
       if (error) {
-        reject(error); // Reject promise if there's an error
+        reject(error);
         return;
       }
 
@@ -24,7 +24,7 @@ const cloudinaryUploadImage = async (file) => {
 
       resolve({
         url: result.secure_url,
-        resource_type: "auto", // Move resource_type here if it's meant to be part of the resolved object
+        resource_type: "auto", 
       });
     });
   });
