@@ -1,0 +1,136 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #1c1c1c;
+    color: #fff;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #000;
+    border-bottom: 1px solid #333;
+  }
+  
+  header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5rem;
+    transition: color 0.3s;
+  }
+  
+  header nav ul li a:hover {
+    color: #ccc;
+  }
+  
+  header .profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  header .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  header .profile-name {
+    font-size: 1rem;
+  }
+  
+  main {
+    display: flex;
+    height: calc(100vh - 100px);
+  }
+  
+  .map-container {
+    flex: 2;
+    position: relative;
+  }
+  
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .details-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .driver-details {
+    background-color: #333;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .driver-details form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .driver-details .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .driver-details .input-group label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .driver-details .input-group input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2px;
+  }
+  
+  .ride-btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .ride-btn:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  footer {
+    padding: 1rem 2rem;
+    background-color: #000;
+    text-align: center;
+    border-top: 1px solid #333;
+  }
+  
+  footer p {
+    margin: 0;
+    color: #ccc;
+  }
+  

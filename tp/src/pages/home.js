@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import RideDetails from './ridedetails';
 import '../App.css';
 import { useParams } from 'react-router-dom';
 
@@ -18,68 +19,40 @@ function Home() {
       .then(data => setUser(data))
       .catch(error => console.error('Error fetching user:', error));
   }, [userId]);
-
+  const [route, setRoute] = useState([]);
   return (
    
-    <div className='Tp'>
-
-             <div className='buttombar'>
-       <input placeholder='From where?'className='from'></input>
-       <input placeholder='To where?'className='to'></input>
-       <a href='/'><button onClick={console.log(('HEllo world'))}>Search</button></a>
-   </div>
-    <div className="mid" >
-       <input placeholder='search'className='sch'></input>
-       <button>FIlter</button>
-       <div className='driver'>
-        <script src=''>
-        </script>
-        </div>
-      
-   
-    </div>
-    <div className='trip'>
-    <p>OrderID: </p>
-    <p>Currnt location: </p>
-    <p>Destination: </p> 
-    <div>Status</div>
-     </div>
-
-     <div className='trip1'>
-    
-    <p>OrderID: </p>
-    <p>Currnt location: </p>
-    <p>Destination: </p> 
-    <div>Status</div>
-     </div>
-     <div className='trip2'>
-    
-    <p id='prv_order'>OrderID: </p>
-    <p id='prv_loc'>Currnt location: </p>
-    <p id='prv_dest'>Destination: </p> 
-    <div>Status</div>
-     </div>
-    
-
-    <div className='info'>
-        <div className='driver_data'>
-        <h1>{user.name}</h1>
-      <p id='drv_name'>Driver Name: {user.name}</p>
-      <p id=''>Phone Number: {user.phone}</p>
-      <p>Car ID: {user.car}</p>
-        </div>
-     </div>
-     <div className='Map'>
-        <MapView/>
+    <div>
+    <header>
+      <div className="logo">TP</div>
+      <nav>
+        <ul>
+          <li><a href="#">Ride</a></li>
+          <li><a href="#">Drive</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </nav>
+      <div className="profile">
+        <Link to='/profile'>
+       <button> <img src="profile.jpg" alt="Profile Picture" className="profile-pic" /> </button>
+        <span className="profile-name">Gabriel</span>
+        </Link>
       </div>
-     <div className='profile'>
-      <Link to= '/profile'>
-      
-      <button onClick={console.log(('HEllo world'))} className='profile'>P</button>      </Link>
-     
-     </div>
-    </div>
-  );
-}
+    </header>
+    <main>
+      <div className="map-container">
+        <MapView />
+      </div>
+      <div className="ride-details">
+      <RideDetails setRoute={setRoute} />
+      </div>
+    </main>
+    <footer>
+      <p>&copy; </p>
+    </footer>
+  </div>
+);
+};
+
 
 export default  Home;

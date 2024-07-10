@@ -1,80 +1,104 @@
-import { Link } from "react-router-dom";
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './styles.css'; // Import your CSS file
 
 const Driver = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [carType, setCarType] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [maxPassengers, setMaxPassengers] = useState(4);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [avatar, setAvatar] = useState(null);
+  const [Platenumber, setPlatenumber] = useState(null);
+  const [registerStatus, setRegisterStatus] = useState('');
 
-  const handleRegister = async (event) => {
-    event.preventDefault();
-    setError('');
+  const handleFileChange = (e) => {
+    setAvatar(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!avatar) {
+      alert('Please upload an avatar.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('username', username);
+    formData.append('avatar', avatar);
+    formData.append('Platenumber',Platenumber)
 
     try {
-      const response = await axios.post('http://localhost:5000/api/driver/sign-up', {
-        first_name: firstname,
-        last_name: lastname,
-        email: email,
-        car_type: carType,
-        password: password,
-        phone_number: phoneNumber,
-        max_passengers: maxPassengers,
+      const response = await axios.post('http://localhost:5000/api/driver/sign-up', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-
-      if (response.data) {
-        alert('Registration successful!');
-        // Redirect to dashboard
-        navigate('/dash');
-      }
-    } catch (err) {
-      setError('Registration failed');
+      setRegisterStatus(`Registration successful. Welcome, ${response.data.username}!`);
+    } catch (error) {
+      console.error('Error registering: ', error);
+      setRegisterStatus('Registration failed. Please try again.');
     }
   };
 
   return (
-    <div className="login-container">
-      <h1>Driver Registration</h1>
-      <form onSubmit={handleRegister}>
-        <label>First Name</label>
-        <input placeholder="First Name" type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} required/>
-        
-        <label>Last Name</label>
-        <input placeholder="Last Name" type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} required/>
-        
-        <label>Email</label>
-        <input placeholder="Email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-        
-        <label>Car Type</label>
-        <input placeholder="Car Type" type="text" value={carType} onChange={(e) => setCarType(e.target.value)} required/>
-        
-        <label>Phone Number</label>
-        <input placeholder="Phone Number" type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/>
-        
-        <label>Max Passengers</label>
-        <input placeholder="Max Passengers" type="number" value={maxPassengers} onChange={(e) => setMaxPassengers(e.target.value)} required/>
-        
-        <label>Password</label>
-        <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-        
-        <label>Confirm Password</label>
-        <input placeholder="Confirm Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-
-        <button type="submit">Register</button>
-        <Link to='/'>
-          <button>Login</button>
-        </Link>
+    <div className="container">
+      <h2>Register</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="avatar">Avatar</label>
+          <input
+            type="file"
+            id="avatar"
+            accept=".jpg,.jpeg,.png"
+            onChange={handleFileChange}
+            required
+          />
+          <label htmlFor='platenumber'>Plate number</label>
+          <input
+           type="file"
+           id="Platenumber"
+           accept=".jpg,.jpeg,.png"
+           onChange={handleFileChange}
+           required
+           />
+        </div>
+        <button type="submit" className="submit-btn">Register</button>
       </form>
-      {error && <p style={{color: 'red'}}>{error}</p>}
+      {registerStatus && <p className="status">{registerStatus}</p>}
     </div>
   );
-}
+};
 
 export default Driver;
